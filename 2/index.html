@@ -13,25 +13,45 @@
 
     <div id="app">
 
+        <form v-on:submit.prevent="saveTask">
+            <input type="text" v-model="newTask" placeholder="Tarea">
+            <input type="submit" value="Guardar tarea">
+        </form>
+
         <p v-for="(value, prop) in user">{{prop}} : {{value}}</p>
         <hr>
 
         <input type="range" v-model="time"> {{time}}
         <hr>
 
-        <input type="search" v-model="search" placeholder="Buscar tarea"> 
+        <input type="search" v-model="search" placeholder="Buscar tarea">
 
         <hr>
         <li v-for="item in filterTasks">{{ item.name }} - {{ item.time }}</li>
     </div>
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script>
+
+        /* // tradicional 
+        window.onload = () => {
+            const form = document.querySelector('form');
+            const input = document.querySelector('input[type=text]')
+            form.onsubmit = (event) => {
+                event.preventDefault();
+                app.tasks.unshift({
+                    name: input.value,
+                    time: 10
+                });
+
+                input.value = null
+            }
+        }*/
+
         const app = new Vue({
             el: "#app",
             data: {
+                newTask: '',
                 time: 0,
                 search: '',
                 user: {
@@ -50,6 +70,15 @@
                     }
 
                 ]
+            },
+            methods: {
+                saveTask() {
+                    this.tasks.unshift({
+                        name: this.newTask,
+                        time: Math.floor(Math.random() * 100 + 1)
+                    });
+                    this.newTask = null;
+                }
             },
             computed: {
                 filterTasks() {
