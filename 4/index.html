@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue</title>
+</head>
+
+
+<body>
+
+    <div id="app">
+        <h3>Cambia tu contraseña</h3>
+        <input type="text" v-model="password">
+        <br>
+        <p>{{status}}</p>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                password: null,
+                status: 'Introduce una contraseña...',
+                unavailable: ['admin', '1234', 'password']
+            },
+            watch: {
+                password(_new, old) {
+                    console.log(_new, old);
+                    
+                    if(this.unavailable.indexOf(_new) > -1) {
+                        this.status = "Contraseña no válida";
+                        return false
+                    }
+
+                    if(_new.length < 5) {
+                        this.status = 'La contraseña debería de tener al menos 5 caracteres';
+                        return false;
+                    }
+
+                    this.status = "Contraseña correcta"
+                }
+            }
+        });
+
+        Vue.config.devtools = true;
+    </script>
+
+</body>
+
+
+</html>
