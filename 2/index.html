@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue</title>
+</head>
+
+
+<body>
+
+    <div id="app">
+
+        <p v-for="(value, prop) in user">{{prop}} : {{value}}</p>
+        <hr>
+
+        <input type="range" v-model="time"> {{time}}
+        <hr>
+
+        <input type="search" v-model="search" placeholder="Buscar tarea"> 
+
+        <hr>
+        <li v-for="item in filterTasks">{{ item.name }} - {{ item.time }}</li>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                time: 0,
+                search: '',
+                user: {
+                    username: 'cris',
+                    role: 'admin'
+                },
+                tasks: [
+                    {
+                        name: 'Aprender JavaScript moderno', time: 3
+                    },
+                    {
+                        name: 'Aprender Vue.js', time: 7
+                    },
+                    {
+                        name: 'Viaje más', time: 22
+                    }
+
+                ]
+            },
+            computed: {
+                filterTasks() {
+                    return this.tasks.filter(task => {
+                        return task.time <= this.time && task.name.includes(this.search);
+                    })
+                }
+            }
+
+        });
+
+        Vue.config.devtools = true;
+
+    </script>
+
+</body>
+
+
+
+
+</html>
