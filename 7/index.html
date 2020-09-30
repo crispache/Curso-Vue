@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue</title>
+</head>
+
+
+<body>
+
+    <main id="app">
+
+        <form @submit.prevent="saveTask">
+            <input v-model="newTask" type="text" placeholder="Tarea" required>
+            <input type="submit" value="enviar">
+        </form>
+
+        <ul>
+            <li v-for="task in tasks">{{task.title}}</li>
+        </ul>
+
+        <pre> {{ $data }}</pre>
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            mounted() {
+                axios.get(this.url)
+                    .then(res => this.tasks = res.data)
+                    .catch(error => console.error(error))
+            },
+            data: {
+                newTask: '',
+                url: 'https://jsonplaceholder.typicode.com/todos',
+                tasks: []
+            },
+            methods: {
+                saveTask(){
+                    axios.post(this.url, {
+                        title: this.newTask,
+                        userID: Math.floor(Math.random() * 10)+1
+                    })
+                    .then( res => {
+                        console.log(res);
+                        this.tasks.unshift({
+                            title: this.newTask
+                        })
+                        this.newTask = '';
+                    })
+
+                    .catch(error => {
+                        console.error(error)
+                    })
+                }
+            }
+
+
+
+
+        });
+
+        Vue.config.devtools = true;
+    </script>
+
+</body>
+
+
+</html>
