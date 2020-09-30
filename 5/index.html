@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue</title>
+    <style>
+            html, body {
+                height: 100%;
+            }
+    
+            body {
+                font-family: sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            main {
+                max-width: 800px;
+                border: 1px solid gray;
+                padding: 20px;
+            }
+    
+            form > * {
+                display: block;
+                width: 100%;
+            }
+    
+            input[type="text"], textarea {
+                border: none;
+                background-color: lightgray;
+                padding: 5px;
+            }
+    
+            label, div, input[type="submit"] {
+                margin-top: 10px;
+                margin-bottom: 5px;
+            }
+    
+            div > * {
+                vertical-align: middle;
+            }
+    
+            label:first-of-type {
+                margin-top: 0;
+            }
+        </style>
+</head>
+
+
+<body>
+
+    <div id="app">
+        <main>
+            <form>
+                <label for="name">Nombre</label>
+                <input type="text" id="name">
+
+                <label for="surname">Apellidos</label>
+                <input type="text" id="surname">
+
+                <label for="address"></label>
+                <select id="address" v-model="address">
+                    <option value="same">Misma dirección que facturación</option>
+                    <option value="new">Introducir nueva dirección</option>
+                </select>
+
+
+                <template v-if="address === 'new'">
+                        <label for="new-address">Nueva dirección</label>
+                        <textarea id="new-address"></textarea>
+                </template>
+               
+
+                <div>
+                    <input type="checkbox" v-model="check"> <span>
+                        He leído y acepto la política de privacidad.
+                    </span>
+                </div>
+
+                <input v-if="check" type="submit" value="Enviar">
+                <p v-else>Debes marcar el checkbox para poder enviar el formulario.</p>
+
+            </form>
+        </main>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                address: '',
+                check: null,
+            },
+
+        });
+
+        Vue.config.devtools = true;
+    </script>
+
+</body>
+
+
+</html>
