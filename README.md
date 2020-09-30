@@ -1,4 +1,4 @@
-# Curso-Vue
+# Curso de Vue
 Repositorio que contiene todo sobre el curso de Vue.js (https://escuelavue.es/).
 Está organizado en los siguientes capítulos:
 
