@@ -3,7 +3,7 @@ Repositorio que contiene todo sobre el curso de Vue.js (https://escuelavue.es/).
 Está organizado en los siguientes capítulos:
 
 
-* Introducción - ¿Qué es Vue y para qué sirve?
+* ¿Qué es Vue y para qué sirve?
 * Vue Devtools
 * Atributos dinámicos
 * Renderizado de listas
