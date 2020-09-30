@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue</title>
+</head>
+
+
+<body>
+
+    <main id="app">
+        <blog-post v-for="post in posts" :post="post"></blog-post>
+        <prev> {{ $data }}</prev>
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+
+        Vue.component('blog-post', {
+            props: ['post'],
+            template: ` <article class="post">
+                         <h2 class="post-title">{{post.title}}</h2>
+                         <p class="post-content">{{post.content}}</p>
+                     </article>`
+        })
+
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                posts: [
+                    {
+                        title: 'Primer título',
+                        content: 'Contenido 1'
+                    },
+                    {
+                        title: 'Segundo título',
+                        content: 'Contenido 2'
+                    },
+                    {
+                        title: 'Tercer título',
+                        content: 'Contenido 3'
+                    },
+                ]
+            },
+        });
+        Vue.config.devtools = true;
+    </script>
+
+</body>
+
+
+</html>
